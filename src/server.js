@@ -5,6 +5,8 @@ const app=express()
 const cors=require('cors')
 const dotenv=require('dotenv');
 
+const User = require('../src/models/users');
+
 dotenv.config();
 
 app.use(express.json())
@@ -47,6 +49,18 @@ app.post('/',async(req,res)=>{
         res.json("fail")
     }
     
+})
+
+app.post('/signUp', async (req, res) => {
+    console.log(req.body.name, req.body.email, req.body.phoneNumber, req.body.password);
+    const newUser = new User(req.body);
+
+    try {
+        newUser.save();
+        console.log(`User saved: ${req.body.name}`);
+    } catch (error) {
+        error.log(`error in saving user: ${user}`);
+    }
 })
 
 app.listen(8000,()=>{

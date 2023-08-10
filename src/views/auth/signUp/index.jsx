@@ -1,7 +1,9 @@
 
-import React from "react";
+import React, {useState} from "react";
+import mongoose from "mongoose";
 import { NavLink } from "react-router-dom";
 // Chakra imports
+// import signUpClick from "../../../utils/auth/authUtils";
 import {
     Box,
     Button,
@@ -26,6 +28,8 @@ import illustration from "assets/img/auth/auth.png";
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
+import axios from 'axios';
+// const User = require('../../../models/users');
 
 function SignUp() {
     // Chakra color mode
@@ -44,8 +48,27 @@ function SignUp() {
         { bg: "secondaryGray.300" },
         { bg: "whiteAlpha.200" }
     );
-    const [show, setShow] = React.useState(false);
+    const [show, setShow] = useState(false);
+    const [user, setUser] = useState({
+        name: "", phoneNumber: "", email: "", password: ""
+    })
     const handleClick = () => setShow(!show);
+    const handleInputs = (e) => {
+        let name, value;
+        name = e.target.name;
+        value = e.target.value;
+        setUser({...user, [name]:value})
+    }
+    const signUpClick = async (e) => {
+        e.preventDefault();
+        try {
+            // newUser.save();
+            console.log(user);
+            await axios.post('http://localhost:8000/signUp', user)
+        } catch (error) {
+            console.log(`error in post ${error}`);
+        }
+    }
     return (
         <DefaultAuth illustrationBackground={illustration} image={illustration}>
             <Flex
@@ -117,6 +140,9 @@ function SignUp() {
                             Name<Text color={brandStars}>*</Text>
                         </FormLabel>
                         <Input
+                            name='name'
+                            value={user.name}
+                            onChange={handleInputs}
                             isRequired={true}
                             variant='auth'
                             fontSize='sm'
@@ -139,12 +165,14 @@ function SignUp() {
                         <InputGroup>
                             <InputLeftAddon children="+91" h="48px"/>
                             <Input
-
+                                name='phoneNumber'
+                                value={user.phoneNumber}
+                                onChange={handleInputs}
                                 isRequired={true}
                                 variant='auth'
                                 fontSize='sm'
                                 ms={{ base: "0px", md: "0px" }}
-                                type=''
+                                type='tel'
                                 placeholder='99999 99999'
                                 mb='24px'
                                 fontWeight='500'
@@ -161,6 +189,9 @@ function SignUp() {
                             Email<Text color={brandStars}>*</Text>
                         </FormLabel>
                         <Input
+                            name='email'
+                            value={user.email}
+                            onChange={handleInputs}
                             isRequired={true}
                             variant='auth'
                             fontSize='sm'
@@ -181,6 +212,9 @@ function SignUp() {
                         </FormLabel>
                         <InputGroup size='md'>
                             <Input
+                                name='password'
+                                value={user.password}
+                                onChange={handleInputs}
                                 isRequired={true}
                                 fontSize='sm'
                                 placeholder='Min. 8 characters'
@@ -204,9 +238,11 @@ function SignUp() {
                             fontWeight='500'
                             w='100%'
                             h='50'
-                            mb='24px'>
+                            mb='24px'
+                            type='submit'
+                            onClick={signUpClick}>
                             Sign Up
-                            onClick={signUpClick}
+
                         </Button>
                     </FormControl>
                     <Flex
