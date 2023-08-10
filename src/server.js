@@ -35,8 +35,8 @@ app.get('/',cors(),async(req,res)=>{
 app.post('/',async(req,res)=>{
     console.log(req.body)
     try{
-        const check=await db.users.find()
-        console.log(check)
+        // const check=await db.users.find()
+        // console.log(check)
         if(check)
         {
             res.json(check)
@@ -52,16 +52,56 @@ app.post('/',async(req,res)=>{
 })
 
 app.post('/signUp', async (req, res) => {
-    console.log(req.body.name, req.body.email, req.body.phoneNumber, req.body.password);
+    // console.log(req.body.name, req.body.email, req.body.phoneNumber, req.body.password);
     const newUser = new User(req.body);
 
     try {
-        newUser.save();
+        await newUser.save();
         console.log(`User saved: ${req.body.name}`);
+        res.send({
+            status: 200,
+            data: {
+                message: "User saved successfully!",
+            },
+        });
     } catch (error) {
-        error.log(`error in saving user: ${user}`);
+        console.log(`error in saving user: ${error}`);
+        res.send({
+            status: 409,
+            data: {
+                message: "User not saved successfully!",
+            },
+        });
     }
 })
+
+app.post('/login', (req, res, next) => {
+    passport.authenticate('local', (err, user, info) => {
+        if (err) {
+            return next(err);
+        }
+
+        if(!user) {
+            console.log(info.message);
+            res.send({
+                status: 404,
+                message: "User not found"
+            })
+        } else
+        {
+            req.logIn(user, function(err) {
+                if (err) {
+                    return next(err);
+                }
+                res.send({
+                    status: 200,
+                    message: "Successful login"
+                })
+            });
+        }
+    })(req, res, next);
+});
+
 
 app.listen(8000,()=>{
     console.log("server started on port 8000")
