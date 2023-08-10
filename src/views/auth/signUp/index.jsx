@@ -1,7 +1,7 @@
 
 import React, {useState} from "react";
 import mongoose from "mongoose";
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 // Chakra imports
 // import signUpClick from "../../../utils/auth/authUtils";
 import {
@@ -49,6 +49,7 @@ function SignUp() {
         { bg: "whiteAlpha.200" }
     );
     const [show, setShow] = useState(false);
+    const [errorInput, setErrorInput] = useState(false);
     const [user, setUser] = useState({
         name: "", phoneNumber: "", email: "", password: ""
     })
@@ -61,14 +62,24 @@ function SignUp() {
     }
     const signUpClick = async (e) => {
         e.preventDefault();
+
         try {
-            // newUser.save();
-            console.log(user);
-            await axios.post('http://localhost:8000/signUp', user)
+            const response = await axios.post('http://localhost:8000/signUp', user);
+            if(response.data.status == 200) {
+                console.log(response.data.status);
+                setErrorInput(false);
+                window.location.href = 'http://localhost:3000/horizon-ui-chakra#/auth/sign-in'
+            } else {
+                setUser({
+                    name: "", phoneNumber: "", email: "", password: ""
+                })
+                setErrorInput(true);
+            }
         } catch (error) {
-            console.log(`error in post ${error}`);
+            console.error('Error:', error);
         }
     }
+
     return (
         <DefaultAuth illustrationBackground={illustration} image={illustration}>
             <Flex
@@ -263,6 +274,10 @@ function SignUp() {
                                 </Text>
                             </NavLink>
                         </Text>
+                        {errorInput ? (
+                        <Text color={'#C53030'} fontWeight='400' fontSize='14px'>
+                            Wrong data type of Input
+                        </Text> ) : <Text></Text>}
                     </Flex>
                 </Flex>
             </Flex>

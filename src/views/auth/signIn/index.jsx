@@ -21,7 +21,7 @@
 
 */
 
-import React from "react";
+import React, {useState} from "react";
 import { NavLink } from "react-router-dom";
 // Chakra imports
 import {
@@ -65,7 +65,20 @@ function SignIn() {
     { bg: "secondaryGray.300" },
     { bg: "whiteAlpha.200" }
   );
-  const [show, setShow] = React.useState(false);
+  const [show, setShow] = useState(false);
+  const [user, setUser] = useState({
+    email: "", password: ""
+  })
+  const handleInputs = (e) => {
+    let name, value;
+    name = e.target.name;
+    value = e.target.value;
+    setUser({...user, [name]:value})
+  }
+  const loginInClick = (e) => {
+    e.preventDefault();
+
+  }
   const handleClick = () => setShow(!show);
   return (
     <DefaultAuth illustrationBackground={illustration} image={illustration}>
@@ -136,11 +149,14 @@ function SignIn() {
             </FormLabel>
             <Input
               isRequired={true}
+              name='email'
+              value={user.email}
+              onChange={handleInputs}
               variant='auth'
               fontSize='sm'
               ms={{ base: "0px", md: "0px" }}
               type='email'
-              placeholder='mail@simmmple.com'
+              placeholder='email@thapar.edu'
               mb='24px'
               fontWeight='500'
               size='lg'
@@ -156,6 +172,9 @@ function SignIn() {
             <InputGroup size='md'>
               <Input
                 isRequired={true}
+                name='password'
+                onChange={handleInputs}
+                value={user.password}
                 fontSize='sm'
                 placeholder='Min. 8 characters'
                 mb='24px'
@@ -204,6 +223,7 @@ function SignIn() {
               fontWeight='500'
               w='100%'
               h='50'
+              onClick={loginInClick}
               mb='24px'>
               Sign In
             </Button>
