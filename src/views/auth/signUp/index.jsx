@@ -83,27 +83,27 @@ function SignUp() {
                     mx={{ base: "auto", lg: "unset" }}
                     me='auto'
                     mb={{ base: "20px", md: "auto" }}>
-                    <Button
-                        fontSize='sm'
-                        me='0px'
-                        mb='26px'
-                        py='15px'
-                        h='50px'
-                        borderRadius='16px'
-                        bg={googleBg}
-                        color={googleText}
-                        fontWeight='500'
-                        _hover={googleHover}
-                        _active={googleActive}
-                        _focus={googleActive}>
-                        <Icon as={FcGoogle} w='20px' h='20px' me='10px' />
-                        Sign in with Google
-                    </Button>
+                    {/*<Button*/}
+                    {/*    fontSize='sm'*/}
+                    {/*    me='0px'*/}
+                    {/*    mb='26px'*/}
+                    {/*    py='15px'*/}
+                    {/*    h='50px'*/}
+                    {/*    borderRadius='16px'*/}
+                    {/*    bg={googleBg}*/}
+                    {/*    color={googleText}*/}
+                    {/*    fontWeight='500'*/}
+                    {/*    _hover={googleHover}*/}
+                    {/*    _active={googleActive}*/}
+                    {/*    _focus={googleActive}>*/}
+                    {/*    <Icon as={FcGoogle} w='20px' h='20px' me='10px' />*/}
+                    {/*    Sign in with Google*/}
+                    {/*</Button>*/}
                     <Flex align='center' mb='25px'>
                         <HSeparator />
-                        <Text color='gray.400' mx='14px'>
-                            or
-                        </Text>
+                        {/*<Text color='gray.400' mx='14px'>*/}
+                        {/*    or*/}
+                        {/*</Text>*/}
                         <HSeparator />
                     </Flex>
                     <FormControl>
@@ -206,6 +206,7 @@ function SignUp() {
                             h='50'
                             mb='24px'>
                             Sign Up
+                            onClick={signUpClick}
                         </Button>
                     </FormControl>
                     <Flex
@@ -215,14 +216,14 @@ function SignUp() {
                         maxW='100%'
                         mt='0px'>
                         <Text color={textColorDetails} fontWeight='400' fontSize='14px'>
-                            Not registered yet?
-                            <NavLink to='/auth/sign-up'>
+                            Already registered?
+                            <NavLink to='/auth/sign-in'>
                                 <Text
                                     color={textColorBrand}
                                     as='span'
                                     ms='5px'
                                     fontWeight='500'>
-                                    Create an Account
+                                    Log In
                                 </Text>
                             </NavLink>
                         </Text>
