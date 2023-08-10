@@ -28,7 +28,7 @@ export default function Conversion(props) {
         <Text color={textColor} fontSize='md' fontWeight='600' mt='4px'>
           Your Pie Chart
         </Text>
-        <Select
+        {/* <Select
           fontSize='sm'
           variant='subtle'
           defaultValue='monthly'
@@ -37,7 +37,7 @@ export default function Conversion(props) {
           <option value='daily'>Daily</option>
           <option value='monthly'>Monthly</option>
           <option value='yearly'>Yearly</option>
-        </Select>
+        </Select> */}
       </Flex>
 
       <PieChart

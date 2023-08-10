@@ -12,14 +12,32 @@ app.use(express.urlencoded({extended:true}))
 app.use(cors())
 
 
-app.get('/',async(req,res)=>{
+app.get('/',cors(),async(req,res)=>{
+    // console.log(req.query)
+    // try{
+    //     const check=await db.users.find()
+    //     console.log(check)
+    //     if(check)
+    //     {
+    //         res.json(check)
+    //     }
+    //     else{
+    //         res.json("notexist")
+    //     }
+    // }
+    // catch(e){
+    //     res.json("fail")
+    // }
+})
 
+app.post('/',async(req,res)=>{
+    console.log(req.body)
     try{
         const check=await db.users.find()
         console.log(check)
         if(check)
         {
-            res.json("exist")
+            res.json(check)
         }
         else{
             res.json("notexist")
@@ -28,12 +46,7 @@ app.get('/',async(req,res)=>{
     catch(e){
         res.json("fail")
     }
-    // db.insertMany([{
-    //     email:'nav@gmail.com',
-    //     amount:'5000',
-    //     transNum:'1'
-    // }])
-    // res.send('hello')
+    
 })
 
 
