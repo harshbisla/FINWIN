@@ -1,0 +1,87 @@
+
+/* CalendarHeatmap.css */
+
+.color-empty {
+    fill:#445d77; /* Change this to the color for empty cells */
+  }
+  
+  .color-low {
+    fill:#3b5977; /* Change this to the color for low count cells */
+  }
+  
+  .color-medium {
+    fill:#1a4774; /* Change this to the color for medium count cells */
+  }
+  
+  .color-high {
+    fill:#3583d2; /* Change this to the color for high count cells */
+  }
+
+  
+
+ text {
+    font-size: 10px;
+    fill: #aaa;
+  }
+  
+ .react-calendar-heatmap-small-text {
+    font-size: 5px;
+  }
+  
+ rect:hover {
+    stroke: #555;
+    stroke-width: 1px;
+  }
+  
+  /*
+   * Default color scale
+   */
+  
+  .react-calendar-heatmap .color-empty {
+    fill: #eeeeee;
+  }
+  
+  .react-calendar-heatmap .color-filled {
+    fill: #8cc665;
+  }
+  
+  /*
+   * Github color scale
+   */
+  
+ .color-github-0 {
+    fill: #eeeeee;
+  }
+ .color-github-1 {
+    fill: #d6e685;
+  }
+ .color-github-2 {
+    fill: #8cc665;
+  }
+ .color-github-3 {
+    fill: #44a340;
+  }
+ .color-github-4 {
+    fill: #1e6823;
+  }
+  
+  /*
+   * Gitlab color scale
+   */
+  
+ .color-gitlab-0 {
+    fill: #ededed;
+  }
+ .color-gitlab-1 {
+    fill: #acd5f2;
+  }
+ .color-gitlab-2 {
+    fill: #7fa8d1;
+  }
+ .color-gitlab-3 {
+    fill: #49729b;
+  }
+ .color-gitlab-4 {
+    fill: #254e77;
+  }
+  
