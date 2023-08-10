@@ -37,7 +37,7 @@ export default function MiniCalendar(props) {
 
 <CalendarHeatmap
   startDate={new Date('2016-01-01')}
-  endDate={new Date('2016-04-01')}
+  endDate={new Date('2016-03-01')}
   values={[
     { date: '2016-01-02', count: 12 },
     { date: '2016-01-22', count: 122 },

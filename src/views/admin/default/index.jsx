@@ -14,6 +14,7 @@ import {
 import MiniCalendar from "components/calendar/MiniCalendar";
 import MiniStatistics from "components/card/MiniStatistics";
 import IconBox from "components/icons/IconBox";
+import Stocks from "../dataTables/components/Stocks";
 import React,{useEffect,useState} from "react";
 import {
   MdAddTask,
@@ -149,10 +150,10 @@ export default function UserReports() {
         </SimpleGrid>
       </SimpleGrid>
       <SimpleGrid columns={{ base: 1, md: 1, xl: 2 }} gap='20px' mb='20px'>
-        <ComplexTable
+        {/* <ComplexTable
           columnsData={columnsDataComplex}
           tableData={tableDataComplex}
-        />
+        /> */}
         <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap='20px'>
           {/* <Tasks /> */}
           <MiniCalendar h='100%' minW='100%' selectRange={false} />
