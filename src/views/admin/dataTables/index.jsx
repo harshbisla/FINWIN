@@ -1,3 +1,4 @@
+
 // Chakra imports
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import DevelopmentTable from "views/admin/dataTables/components/DevelopmentTable";
@@ -15,7 +16,7 @@ import tableDataCheck from "views/admin/dataTables/variables/tableDataCheck.json
 import tableDataColumns from "views/admin/dataTables/variables/tableDataColumns.json";
 import tableDataComplex from "views/admin/dataTables/variables/tableDataComplex.json";
 import React from "react";
-
+import Questionnaire from "../default/components/Questionnaire";
 import Stocks from "views/admin/dataTables/components/Stocks";
 // import stocks from "./components/Stocks";
 // import ColumnsTable from "./components/ColumnsTable";
@@ -48,6 +49,7 @@ export default function Settings() {
         />
         /> */}
         <Stocks/>
+        {/* <Questionnaire/> */}
 
       </SimpleGrid>
     </Box>
