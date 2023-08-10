@@ -13,21 +13,21 @@ app.use(cors())
 
 
 app.get('/',cors(),async(req,res)=>{
-    // console.log(req.query)
-    // try{
-    //     const check=await db.users.find()
-    //     console.log(check)
-    //     if(check)
-    //     {
-    //         res.json(check)
-    //     }
-    //     else{
-    //         res.json("notexist")
-    //     }
-    // }
-    // catch(e){
-    //     res.json("fail")
-    // }
+    console.log(req.query)
+    try{
+        const check=await db.users.find()
+        console.log(check)
+        if(check)
+        {
+            res.json(check)
+        }
+        else{
+            res.json("notexist")
+        }
+    }
+    catch(e){
+        res.json("fail")
+    }
 })
 
 app.post('/',async(req,res)=>{
@@ -48,8 +48,6 @@ app.post('/',async(req,res)=>{
     }
     
 })
-
-
 
 app.listen(8000,()=>{
     console.log("server started on port 8000")

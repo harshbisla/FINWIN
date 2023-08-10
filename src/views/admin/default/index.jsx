@@ -38,20 +38,17 @@ import axios from 'axios'
 
 export default function UserReports() {
   // Chakra Color Mode
+  const [data,setData]=useState({})
 
   useEffect(async()=>{
     console.log("HEllo")
-    await axios.post('/',{
-      params:{
-        email:'nav@gmail.com'
-      }
-    })
+    await axios.get('http://localhost:8000')
     .then((res)=>{
-      console.log(res.data)
+      setData(res)
     })
     .catch((e)=>{
-      console.log(e)
-    })  
+        console.log(e)
+    })
   },[])
   
   const brandColor = useColorModeValue("brand.500", "white");
@@ -74,7 +71,7 @@ export default function UserReports() {
             />
           }
           name='Earnings'
-          value='$350.4'
+          value={data.netincome}
         />
         <MiniStatistics
           startContent={
