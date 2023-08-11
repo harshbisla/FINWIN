@@ -4,8 +4,8 @@ mongoose.connect(process.env.URL)
 .then(()=>{
     console.log("connected")
 })
-.catch(()=>{
-    console.log('Not connected')
+.catch((e)=>{
+    console.log(`Not connected ${e}`)
 })
 
 const transaction= require('./models/transactions')

@@ -2,30 +2,28 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const User = require('../src/models/users');
 
-const validatePassword = (email, password) => {
-    const user = User.fineOne({email: email})
-    if(user.password == password) {
-        return true;
-    }
-    return false;
-}
-
 const verifyCallback = (req, email, password, done) => {
-    User.fineOne({email: email})
-        .then((user) => {
-            if(!user) {
+    let isValid = false;
+    // console.log(email, password);
+    User.findOne({ email: email }).exec()
+        .then(user => {
+            if (user) {
+                if (user.password == password) {
+                    console.log('valid ');
+                    return done(null, user, {message: true})
+                } else {
+                    console.log(' not valid');
+                    return done(null, false, {message: false});
+                }
+            } else {
+                console.log('verifycallback !user');
                 return done(null, false, {message: false})
             }
-    const isValid = validatePassword(req.body.email, req.body.password);
-    if (isValid) {
-        return done(null, user, {message: true})
-    } else {
-        return done(null, false, {message: false});
-    }
-}).catch((err) => {
-    console.log(`authorization error: ${err}`)};
-    done(err);
-});
+        })
+        .catch(error => {
+            console.error('Error:', error);
+
+        });
 }
 
 const strategy = new LocalStrategy({usernameField: 'email', passwordField: 'password', passReqToCallback: true}, verifyCallback);
@@ -33,15 +31,25 @@ const strategy = new LocalStrategy({usernameField: 'email', passwordField: 'pass
 passport.use(strategy);
 
 passport.serializeUser((user, done) => {
-    done(null, {id: user.id, role: user.role});
-}
-passport.deserializeUser((user, done) => {
-    User.findById(user.id).then((user) => {
-        done(null, user);
-    })
-        .catch(err => {console.log(`deserialize err ${err}`);
-            done(err)})
+    try {
+        console.log(user.id);
+        done(null, user.id);
+    } catch (e)
+    {
+        console.log(`serialize error ${e}`)
+    }
+
 })
+
+passport.deserializeUser((id, done) => {
+    console.log(`deserializing ${id}`);
+    User.findById(id).then((foundUser) => { // Use a different parameter name here
+        done(null, foundUser);
+    }).catch(err => {
+        console.log(`deserialize err ${err}`);
+        done(err);
+    });
 });
 
 
+//

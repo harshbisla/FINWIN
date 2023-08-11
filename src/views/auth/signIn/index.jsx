@@ -1,27 +1,5 @@
-/* eslint-disable */
-/*!
-  _   _  ___  ____  ___ ________  _   _   _   _ ___   
- | | | |/ _ \|  _ \|_ _|__  / _ \| \ | | | | | |_ _| 
- | |_| | | | | |_) || |  / / | | |  \| | | | | || | 
- |  _  | |_| |  _ < | | / /| |_| | |\  | | |_| || |
- |_| |_|\___/|_| \_\___/____\___/|_| \_|  \___/|___|
-                                                                                                                                                                                                                                                                                                                                       
-=========================================================
-* Horizon UI - v1.1.0
-=========================================================
 
-* Product Page: https://www.horizon-ui.com/
-* Copyright 2023 Horizon UI (https://www.horizon-ui.com/)
-
-* Designed and Coded by Simmmple
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { NavLink } from "react-router-dom";
 // Chakra imports
 import {
@@ -47,6 +25,8 @@ import illustration from "assets/img/auth/auth.png";
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
+import axios from 'axios';
+axios.default.withCredentials=true;
 
 function SignIn() {
   // Chakra color mode
@@ -66,6 +46,7 @@ function SignIn() {
     { bg: "whiteAlpha.200" }
   );
   const [show, setShow] = useState(false);
+  const [errorInput, setErrorInput] = useState(false);
   const [user, setUser] = useState({
     email: "", password: ""
   })
@@ -75,10 +56,33 @@ function SignIn() {
     value = e.target.value;
     setUser({...user, [name]:value})
   }
-  const loginInClick = (e) => {
-    e.preventDefault();
+  const loginInClick = async (e) => {
+      e.preventDefault();
 
+      try {
+        // console.log('h')
+          const response = await axios.post('http://localhost:8000/signIn', user);
+          if(response.data.status == 200) {
+            console.log(response.data.user);
+            setErrorInput(false);
+            window.location.href = 'http://localhost:3000/horizon-ui-chakra#/'
+          } else {
+              setUser({
+                email: "", password: ""
+          })
+            setErrorInput(true);
+        }
+      }   catch (error) {
+            console.error('Error:', error);
+      }
   }
+
+  useEffect(() => {
+    axios.get('http://localhost:8000/signIn').then((response) => {
+      console.log(response);
+    })
+  }, [])
+
   const handleClick = () => setShow(!show);
   return (
     <DefaultAuth illustrationBackground={illustration} image={illustration}>
@@ -246,6 +250,14 @@ function SignIn() {
                 </Text>
               </NavLink>
             </Text>
+            {errorInput ? (
+            <Text
+                color={'#C53030'}
+                as='span'
+                ms='5px'
+                fontWeight='500'>
+                Wrong password or email
+            </Text> ) : <Text></Text> }
           </Flex>
         </Flex>
       </Flex>
