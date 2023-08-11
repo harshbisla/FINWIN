@@ -26,6 +26,8 @@ const Questionnaire = () => {
   ];
 
   const [answers, setAnswers] = useState({});
+  const [response, setResponse] = useState(null);
+  const [responseGenerated, setResponseGenerated] = useState(false);
 
   const handleAnswerChange = (questionId, value) => {
     setAnswers((prevAnswers) => ({ ...prevAnswers, [questionId]: value }));
@@ -33,24 +35,46 @@ const Questionnaire = () => {
 
 
 
+  const handleExportJSON = async() => {
+    const jsonAnswers = JSON.stringify(answers, null, 2);
+    console.log(jsonAnswers); // Display the JSON object in the browser console
 
+    // Simulate an asynchronous call to generate the response
+    const responseFromOtherFile = await generateResponse(jsonAnswers);
+
+    setResponse(responseFromOtherFile);
+    setResponseGenerated(true);
+  };
+
+
+  // Simulate the response generation in another file
+  const generateResponse = (jsonAnswers) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const response = `Your portfolio response: ${jsonAnswers}`;
+        resolve(response);
+      }, 2000); // Simulate a delay
+    });
+  };
 
 
   return (
-    <Card p={4} w={1000}>
+    <Card p={10} w={1300} bg="gray.300">
       <Text fontSize="xl" fontWeight="bold" mb={4}>
         Investment Plan Predictor
       </Text>
-      <Flex direction="column">
-        <Flex direction="row" flexWrap="wrap" justifyContent="space-between">
+      <Flex direction="column" >
+        <Flex direction={{ base: "column", md: "row" }} flexWrap="wrap" justifyContent="space-between" gap={{ base: 4, md: 8 }}>
           {questions.map((question) => (
-            <Box key={question.id}
-            w="48%"
-            p={4}
-            mb={4}
-            borderRadius="md"
-            bg="gray.100"
-            boxShadow="md">
+            <Box 
+              key={question.id}
+              w={{ base: "100%", md: "48%" }}
+              p={5}
+              mb={4}
+              borderRadius="md"
+              bg="gray.100"
+              boxShadow="md"
+            >
               <Text fontSize="lg" fontWeight="bold" mb={2}>
                 {question.question}
               </Text>
@@ -58,14 +82,18 @@ const Questionnaire = () => {
                 <Input
                   type="number"
                   value={answers[question.id] || ""}
-                  onChange={(e) => handleAnswerChange(question.id, e.target.value)}
+                  onChange={(e) =>
+                    handleAnswerChange(question.id, e.target.value)
+                  }
                 />
               )}
               {question.answerType === "string" && (
                 <Input
                   type="text"
                   value={answers[question.id] || ""}
-                  onChange={(e) => handleAnswerChange(question.id, e.target.value)}
+                  onChange={(e) =>
+                    handleAnswerChange(question.id, e.target.value)
+                  }
                   border="1px solid #CBD5E0"
                   borderRadius="md"
                   p={2}
@@ -85,26 +113,39 @@ const Questionnaire = () => {
                 </VStack>
               )}
               {question.answerType === "range" && (
-                <Slider
-                  min={question.min}
-                  max={question.max}
-                  value={parseInt(answers[question.id]) || 0}
-                  onChange={(value) => handleAnswerChange(question.id, value)}
-                >
-                  <SliderTrack>
-                    <SliderFilledTrack />
-                  </SliderTrack>
-                  <SliderThumb />
-                </Slider>
+                <VStack align="start" spacing={2}>
+                  <Slider
+                    min={question.min}
+                    max={question.max}
+                    value={parseInt(answers[question.id]) || 0}
+                    onChange={(value) =>
+                      handleAnswerChange(question.id, value)
+                    }
+                  >
+                    <SliderTrack>
+                      <SliderFilledTrack />
+                    </SliderTrack>
+                    <SliderThumb />
+                  </Slider>
+                  <Text>
+                    {answers[question.id] || question.min} years
+                  </Text>
+                </VStack>
               )}
             </Box>
           ))}
         </Flex>
-        <HStack spacing={4} mt={4}>
-          <Button colorScheme="blue" onClick={() => console.log(answers)}>
-            Submit
+        <HStack spacing={4} mt={4} justifyContent="flex">
+          <Button colorScheme="blue" onClick={handleExportJSON}>
+            Create My portfolio...
           </Button>
         </HStack>
+        {/* {responseGenerated && (
+          <Alert status="success" mt={4}>
+            <AlertIcon />
+            {response}
+          </Alert>
+        )} */}
       </Flex>
     </Card>
   );

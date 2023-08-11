@@ -2,19 +2,19 @@
 /* CalendarHeatmap.css */
 
 .color-empty {
-    fill:#445d77; /* Change this to the color for empty cells */
+    fill:#bac1ca; /* Change this to the color for empty cells */
   }
   
   .color-low {
-    fill:#3b5977; /* Change this to the color for low count cells */
+    fill:#8fbff1; /* Change this to the color for low count cells */
   }
   
   .color-medium {
-    fill:#1a4774; /* Change this to the color for medium count cells */
+    fill:#4c9ced; /* Change this to the color for medium count cells */
   }
   
   .color-high {
-    fill:#3583d2; /* Change this to the color for high count cells */
+    fill:#0861b9; /* Change this to the color for high count cells */
   }
 
   

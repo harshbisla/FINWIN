@@ -41,7 +41,7 @@ import {
 import tableDataCheck from "views/admin/default/variables/tableDataCheck.json";
 import tableDataComplex from "views/admin/default/variables/tableDataComplex.json";
 import axios from 'axios'
-import Questionnaire from "./components/Questionnaire";
+import Questionnaire from "../marketplace/components/Questionnaire";
 
 export default function UserReports() {
   // Chakra Color Mode
@@ -188,7 +188,7 @@ export default function UserReports() {
         <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap='20px'>
           <MiniCalendar h='100%' minW='100%' selectRange={false} />
           
-          <Questionnaire/>
+          {/* <Questionnaire/> */}
         </SimpleGrid>
       </SimpleGrid>
       </>

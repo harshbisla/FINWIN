@@ -7,6 +7,7 @@ import {
   MdHome,
   MdLock,
   MdOutlineShoppingCart,
+  MdQuestionAnswer,
 } from "react-icons/md";
 
 // Admin Imports
@@ -28,23 +29,23 @@ const routes = [
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
     component: MainDashboard,
   },
-  // {
-  //   name: "NFT Marketplace",
-  //   layout: "/admin",
-  //   path: "/nft-marketplace",
-  //   icon: (
-  //     <Icon
-  //       as={MdOutlineShoppingCart}
-  //       width='20px'
-  //       height='20px'
-  //       color='inherit'
-  //     />
-  //   ),
-  //   component: NFTMarketplace,
-  //   secondary: true,
-  // },
   {
-    name: "Data Tables",
+    name: "Investment Plan Predictor",
+    layout: "/admin",
+    path: "/nft-marketplace",
+    icon: (
+      <Icon
+        as={MdQuestionAnswer}
+        width='20px'
+        height='20px'
+        color='inherit'
+      />
+    ),
+    component: NFTMarketplace,
+    secondary: true,
+  },
+  {
+    name: "Mutual Funds",
     layout: "/admin",
     icon: <Icon as={MdBarChart} width='20px' height='20px' color='inherit' />,
     path: "/data-tables",

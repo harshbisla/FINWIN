@@ -36,12 +36,28 @@ export default function MiniCalendar(props) {
       /> */}
 
 <CalendarHeatmap
-  startDate={new Date('2016-01-01')}
-  endDate={new Date('2016-03-01')}
+  startDate={new Date('2016-08-01')}
+  endDate={new Date('2016-10-01')}
   values={[
-    { date: '2016-01-02', count: 12 },
-    { date: '2016-01-22', count: 122 },
-    { date: '2016-01-30', count: 38 },
+    { date: '2016-08-02', count: 1223 },
+    { date: '2016-08-22', count: 122 },
+    { date: '2016-08-30', count: 38 },
+    { date: '2016-08-12', count: 12 },
+    { date: '2016-08-21', count: 12243 },
+    { date: '2016-08-25', count: 38 },
+    { date: '2016-08-09', count: 12 },
+    { date: '2016-09-05', count: 122 },
+    { date: '2016-09-25', count: 380 },
+    { date: '2016-09-17', count: 120 },
+    { date: '2016-09-22', count: 1150 },
+    { date: '2016-09-30', count: 950 },
+    { date: '2016-09-02', count: 12 },
+    { date: '2016-09-22', count: 122 },
+    { date: '2016-08-30', count: 38 },
+    { date: '2016-09-02', count: 12 },
+    { date: '2016-09-07', count: 122 },
+    { date: '2016-09-07', count: 122 },
+    { date: '2016-08-03', count: 38 },
     // ...and so on
   ]}
 
@@ -50,10 +66,10 @@ export default function MiniCalendar(props) {
     if (!value) {
       return 'color-empty'; // CSS class for empty cells
     }
-    if (value.count <= 50) {
+    if (value.count <= 500) {
       return 'color-low'; // CSS class for low count cells
     }
-    if (value.count <= 100) {
+    if (value.count <= 1000) {
       return 'color-medium'; // CSS class for medium count cells
     }
     return 'color-high'; // CSS class for high count cells
