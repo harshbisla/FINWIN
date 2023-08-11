@@ -18,6 +18,8 @@ import MiniStatistics from "components/card/MiniStatistics";
 import MiniStatics2 from "components/card/MiniStatics2";
 
 import IconBox from "components/icons/IconBox";
+// import Stocks from "../dataTables/components/Stocks";
+import Card from "components/card/Card";
 import React,{useEffect,useState} from "react";
 import {
   MdAddTask,
@@ -39,6 +41,7 @@ import {
 import tableDataCheck from "views/admin/default/variables/tableDataCheck.json";
 import tableDataComplex from "views/admin/default/variables/tableDataComplex.json";
 import axios from 'axios'
+import Questionnaire from "./components/Questionnaire";
 
 export default function UserReports() {
   // Chakra Color Mode
@@ -178,12 +181,14 @@ export default function UserReports() {
         </SimpleGrid>
       </SimpleGrid>
       <SimpleGrid columns={{ base: 1, md: 1, xl: 2 }} gap='20px' mb='20px'>
-        <ComplexTable
+        {/* <ComplexTable
           columnsData={columnsDataComplex}
           tableData={tableDataComplex}
-        />
+        /> */}
         <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap='20px'>
           <MiniCalendar h='100%' minW='100%' selectRange={false} />
+          
+          <Questionnaire/>
         </SimpleGrid>
       </SimpleGrid>
       </>

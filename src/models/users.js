@@ -2,27 +2,31 @@ const mongoose=require('mongoose')
 const userSchema = new mongoose.Schema({
     email:{
         type:String,
-        required:true
+        required:false
     },
     password:{
         type:String,
-        required:true
+        required:false
     },
     name:{
         type:String,
-        required:true
+        required:false
     },
     netincome:{
         type:Number,
-        required:true
+        required:false
     },
     age:{
         type:Number,
-        required:true
+        required:false
     },
     interest:{
         type:String,
-        required:true
+        required:false
+    },
+    phoneNumber: {
+        type:Number,
+        required: false
     }
     // otherIncome:{
     //     type:Number
