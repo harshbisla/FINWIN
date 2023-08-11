@@ -10,11 +10,11 @@ const tranSchema = new mongoose.Schema({
     },
     label:{
         type:String,
-        required:true
+        required:false
     },
     date:{
         type:Date,
-        required:true
+        required:false
     }   
 })
 

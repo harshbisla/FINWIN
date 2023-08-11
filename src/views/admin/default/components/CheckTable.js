@@ -18,6 +18,7 @@ import {
   useTable,
 } from "react-table";
 
+import {abs} from 'math'
 // Custom components
 import Card from "components/card/Card";
 import Menu from "components/menu/MainMenu";
@@ -94,20 +95,15 @@ export default function CheckTable(props) {
               <Tr {...row.getRowProps()} key={index}>
                 {row.cells.map((cell, index) => {
                   let data = "";
-                  if (cell.column.Header === "NAME") {
+                  if (cell.column.Header === "TRANSACTION ID") {
                     data = (
                       <Flex align='center'>
-                        {/* <Checkbox
-                          defaultChecked={cell.value[1]}
-                          colorScheme='brandScheme'
-                          me='10px'
-                        /> */}
                         <Text color={textColor} fontSize='sm' fontWeight='700'>
-                          {cell.value[0]}
+                          {cell.value}
                         </Text>
                       </Flex>
                     );
-                  } else if (cell.column.Header === "PROGRESS") {
+                  } else if (cell.column.Header === "AMOUNT") {
                     data = (
                       <Flex align='center'>
                         <Text
@@ -115,23 +111,37 @@ export default function CheckTable(props) {
                           color={textColor}
                           fontSize='sm'
                           fontWeight='700'>
-                          {cell.value}%
+                          {abs(cell.value)}
                         </Text>
                       </Flex>
                     );
-                  } else if (cell.column.Header === "QUANTITY") {
+                  } 
+                  else if (cell.column.Header === "TYPE") {
                     data = (
-                      <Text color={textColor} fontSize='sm' fontWeight='700'>
-                        {cell.value}
-                      </Text>
+                      <Flex align='center'>
+                        <Text
+                          me='10px'
+                          color={textColor}
+                          fontSize='sm'
+                          fontWeight='700'>
+                          {cell.value}
+                        </Text>
+                      </Flex>
                     );
-                  } else if (cell.column.Header === "DATE") {
-                    data = (
-                      <Text color={textColor} fontSize='sm' fontWeight='700'>
-                        {cell.value}
-                      </Text>
-                    );
-                  }
+                  } 
+                  // else if (cell.column.Header === "QUANTITY") {
+                  //   data = (
+                  //     <Text color={textColor} fontSize='sm' fontWeight='700'>
+                  //       {cell.value}
+                  //     </Text>
+                  //   );
+                  // } else if (cell.column.Header === "DATE") {
+                  //   data = (
+                  //     <Text color={textColor} fontSize='sm' fontWeight='700'>
+                  //       {cell.value}
+                  //     </Text>
+                  //   );
+                  // }
                   return (
                     <Td
                       {...cell.getCellProps()}

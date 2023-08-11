@@ -13,6 +13,8 @@ export default function Conversion(props) {
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const cardColor = useColorModeValue("white", "navy.700");
+  const back=pieChartOptions.fill.colors
+  
   const cardShadow = useColorModeValue(
     "0px 18px 40px rgba(112, 144, 176, 0.12)",
     "unset"
@@ -53,37 +55,110 @@ export default function Conversion(props) {
         w='100%'
         p='15px'
         px='20px'
-        mt='15px'
+        mt='0px'
         mx='auto'>
         <Flex direction='column' py='5px'>
           <Flex align='center'>
-            <Box h='8px' w='8px' bg='brand.500' borderRadius='50%' me='4px' />
+            <Box h='8px' w='8px' bg={back[0]} borderRadius='50%' me='4px' />
             <Text
               fontSize='xs'
               color='secondaryGray.600'
               fontWeight='700'
               mb='5px'>
-              Your files
+              {pieChartOptions.labels[0]}
             </Text>
           </Flex>
           <Text fontSize='lg' color={textColor} fontWeight='700'>
-            63%
+          {pieChartData[0]}%
           </Text>
         </Flex>
-        <VSeparator mx={{ base: "60px", xl: "60px", "2xl": "60px" }} />
+        <VSeparator mx={{ base: "6px", xl: "6px", "2xl": "6px" }} />
         <Flex direction='column' py='5px' me='10px'>
           <Flex align='center'>
-            <Box h='8px' w='8px' bg='#6AD2FF' borderRadius='50%' me='4px' />
+            <Box h='8px' w='8px' bg={back[1]} borderRadius='50%' me='4px' />
             <Text
               fontSize='xs'
               color='secondaryGray.600'
               fontWeight='700'
               mb='5px'>
-              System
+              {pieChartOptions.labels[1]}
             </Text>
           </Flex>
           <Text fontSize='lg' color={textColor} fontWeight='700'>
-            25%
+            {pieChartData[1]}%
+          </Text>
+        </Flex>
+        <VSeparator mx={{ base: "6px", xl: "6px", "2xl": "6px" }} />
+        <Flex direction='column' py='5px' me='10px'>
+          <Flex align='center'>
+            <Box h='8px' w='8px' bg={back[2]} borderRadius='50%' me='4px' />
+            <Text
+              fontSize='xs'
+              color='secondaryGray.600'
+              fontWeight='700'
+              mb='5px'>
+              {pieChartOptions.labels[2]}
+            </Text>
+          </Flex>
+          <Text fontSize='lg' color={textColor} fontWeight='700'>
+            {pieChartData[2]}%
+          </Text>
+        </Flex>
+      </Card>
+      <Card
+        bg={cardColor}
+        flexDirection='row'
+        boxShadow={cardShadow}
+        w='100%'
+        p='15px'
+        px='20px'
+        mt='5px'
+        mx='auto'>
+        <Flex direction='column' py='5px'>
+          <Flex align='center'>
+            <Box h='8px' w='8px' bg={back[3]} borderRadius='50%' me='4px' />
+            <Text
+              fontSize='xs'
+              color='secondaryGray.600'
+              fontWeight='700'
+              mb='5px'>
+              {pieChartOptions.labels[3]}
+            </Text>
+          </Flex>
+          <Text fontSize='lg' color={textColor} fontWeight='700'>
+          {pieChartData[3]}%
+          </Text>
+        </Flex>
+        <VSeparator mx={{ base: "6px", xl: "6px", "2xl": "6px" }} />
+        <Flex direction='column' py='5px' me='10px'>
+          <Flex align='center'>
+            <Box h='8px' w='8px' bg={back[4]} borderRadius='50%' me='4px' />
+            <Text
+              fontSize='xs'
+              color='secondaryGray.600'
+              fontWeight='700'
+              mb='5px'>
+              {pieChartOptions.labels[4]}
+            </Text>
+          </Flex>
+          <Text fontSize='lg' color={textColor} fontWeight='700'>
+            {pieChartData[4]}%
+          </Text>
+        </Flex>
+        <VSeparator mx={{ base: "6px", xl: "6px", "2xl": "6px" }} />
+        <Flex direction='column' py='5px' me='10px'>
+          <Flex align='center'>
+            <Box h='8px' w='8px' bg={back[5]} borderRadius='50%' me='4px' />
+            <Text
+              fontSize='xs'
+              color='secondaryGray.600'
+              fontWeight='700'
+              mb='5px'>
+              {pieChartOptions.labels[5]}
+            </Text>
+          </Flex>
+          <Text fontSize='lg' color={textColor} fontWeight='700'>
+            {pieChartData[5]}%
           </Text>
         </Flex>
       </Card>

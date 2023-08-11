@@ -41,7 +41,7 @@ export default function Default(props) {
             fontSize={{
               base: "2xl",
             }}>
-            {value}
+            ₹{value}
           </StatNumber>
           {growth ? (
             <Flex align='center'>

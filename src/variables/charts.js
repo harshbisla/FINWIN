@@ -2,8 +2,8 @@
 
 export const barChartDataDailyTraffic = [
   {
-    name: "Daily Traffic",
-    data: [20, 30, 40, 20, 45, 50, 30],
+    name: "Daily Expenses",
+    data: [7000,1222,8888, 4140,4000,-1002],
   },
 ];
 
@@ -27,7 +27,7 @@ export const barChartOptionsDailyTraffic = {
     theme: "dark",
   },
   xaxis: {
-    categories: ["00", "04", "08", "12", "14", "16", "18"],
+    categories: ["6", "7", "8", "9", "10", "11"],
     show: false,
     labels: {
       show: true,
@@ -80,7 +80,7 @@ export const barChartOptionsDailyTraffic = {
         [
           {
             offset: 0,
-            color: "#4318FF",
+            color: "#016CBC",
             opacity: 1,
           },
           {
@@ -107,16 +107,16 @@ export const barChartOptionsDailyTraffic = {
 
 export const barChartDataConsumption = [
   {
-    name: "PRODUCT A",
-    data: [400, 370, 330, 390, 320, 350, 360, 320, 380],
+    name: "Rent",
+    data: [400, 400, 400, 400, 400, 400, 400, 400, 400],
   },
   {
-    name: "PRODUCT B",
-    data: [400, 370, 330, 390, 320, 350, 360, 320, 380],
+    name: "Shopping",
+    data: [0, 1000, 500, 100, 1200, 430, 360, 320, 380],
   },
   {
-    name: "PRODUCT C",
-    data: [400, 370, 330, 390, 320, 350, 360, 320, 380],
+    name: "Food",
+    data: [120, 370, 330, 390, 320, 200, 360, 320, 380],
   },
 ];
 
@@ -141,7 +141,7 @@ export const barChartOptionsConsumption = {
     theme: "dark",
   },
   xaxis: {
-    categories: ["17", "18", "19", "20", "21", "22", "23", "24", "25"],
+    categories: ["3", "4", "5", "6", "7", "8", "9", "10", "11"],
     show: false,
     labels: {
       show: true,
@@ -209,8 +209,8 @@ export const barChartOptionsConsumption = {
 };
 
 export const pieChartOptions = {
-  labels: ["Your files", "System", "Empty"],
-  colors: ["#4318FF", "#6AD2FF", "#EFF4FB"],
+  labels: ["Rent", "Shopping","Health","Food","Travel","Others"],
+  colors: ["#4318FF", "#6AD2FF", "#03adfc","#03b1fc","#03e7fc","#3d03fc"],
   chart: {
     width: "50px",
   },
@@ -239,7 +239,7 @@ export const pieChartOptions = {
     },
   },
   fill: {
-    colors: ["#4318FF", "#6AD2FF", "#EFF4FB"],
+    colors: ["#002D64", "#016CBC", "#0F9EEA","#30B7EE","#6AD2F5","#B2EDFF"],
   },
   tooltip: {
     enabled: true,
@@ -247,18 +247,18 @@ export const pieChartOptions = {
   },
 };
 
-export const pieChartData = [63, 25, 12];
+export const pieChartData = [15,24,10,12,7,32];
 
 // Total Spent Default
 
 export const lineChartDataTotalSpent = [
   {
     name: "Income",
-    data: [50, 64, 48, 66, 49, 68],
+    data: [],
   },
   {
     name: "Expenses",
-    data: [30, 40, 24, 46, 20, 46],
+    data: [],
   },
 ];
 
@@ -304,7 +304,7 @@ export const lineChartOptionsTotalSpent = {
   },
   xaxis: {
     type: "numeric",
-    categories: ["SEP", "OCT", "NOV", "DEC", "JAN", "FEB"],
+    // categories: ["SEP", "OCT", "NOV", "DEC", "JAN", "FEB"],
     labels: {
       style: {
         colors: "#A3AED0",

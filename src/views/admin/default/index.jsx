@@ -7,12 +7,16 @@ import {
   Select,
   SimpleGrid,
   useColorModeValue,
+  Progress
 } from "@chakra-ui/react";
+import {abs} from 'math'
 // Assets
 // import Usa from "assets/img/dashboards/usa.png";
 // Custom components
 import MiniCalendar from "components/calendar/MiniCalendar";
 import MiniStatistics from "components/card/MiniStatistics";
+import MiniStatics2 from "components/card/MiniStatics2";
+
 import IconBox from "components/icons/IconBox";
 import React,{useEffect,useState} from "react";
 import {
@@ -38,24 +42,62 @@ import axios from 'axios'
 
 export default function UserReports() {
   // Chakra Color Mode
-  const [data,setData]=useState({})
+  let ftrans=[]
+  let type=[]
+  const [user,setUser]=useState([])
+  const [trans,setTrans]=useState([])
+  const [isLoading,setIsLoading]=useState(true)
+
+  const [sales,setSales]=useState(0)
+  const [exp,setExp]=useState(0)
+  const [balance,setBalance]=useState(0)
+  const [income,setIncome]=useState(0)
+  
+  useEffect(async()=>{
+    // if (isStopped) {
+    //   return;
+    // }
+    const email='nav@gmail.com'
+    const response=await axios.post('http://localhost:8000/getUser',{email})
+    const resTrans=await axios.post('http://localhost:8000/getTrans',{email})
+    setUser(await response.data)
+    setTrans(await resTrans.data)
+    setIsLoading(false)
+  },[])
 
   useEffect(async()=>{
-    console.log("HEllo")
-    await axios.get('http://localhost:8000')
-    .then((res)=>{
-      setData(res)
+    let s=0
+    let e=0
+    trans.map((tran)=>{
+      if(tran.amount>0)
+      {
+        s+=tran.amount
+      }
+      else if(tran.amount<0){
+        e+=abs(tran.amount)
+      }
     })
-    .catch((e)=>{
-        console.log(e)
-    })
-  },[])
+    setSales(await s)
+    setExp(await e)
+  },[trans])
+
+  // useEffect(async()=>{
+  //   user.map((tran)=>{
+      
+  //   })
+  //   setIncome(await user[0].netincome)
+  //   setBalance(await user[0].netincome)
+  // },[user])
   
+  // console.log(data)
   const brandColor = useColorModeValue("brand.500", "white");
   const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
   return (
-    <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
-      <SimpleGrid
+    <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>  
+        {isLoading ? (
+        <div><Progress size="xs" isIndeterminate /></div>
+      ) : (<>
+        <SimpleGrid
         columns={{ base: 1, md: 2, lg: 3, "2xl": 6 }}
         gap='20px'
         mb='20px'>
@@ -71,7 +113,7 @@ export default function UserReports() {
             />
           }
           name='Earnings'
-          value={data.netincome}
+          value={user[0].netincome}
         />
         <MiniStatistics
           startContent={
@@ -85,43 +127,16 @@ export default function UserReports() {
             />
           }
           name='Spend this month'
-          value='$642.39'
+          value={exp}
         />
-        <MiniStatistics growth='+23%' name='Sales' value='$574.34' />
+        
+        <MiniStatistics name='Sales' value={sales} />
         <MiniStatistics
-          // endContent={
-          //   <Flex me='-16px' mt='10px'>
-          //     <FormLabel htmlFor='balance'>
-          //       <Avatar src={Usa} />
-          //     </FormLabel>
-          //     <Select
-          //       id='balance'
-          //       variant='mini'
-          //       mt='5px'
-          //       me='0px'
-          //       defaultValue='usd'>
-          //       <option value='usd'>USD</option>
-          //       <option value='eur'>EUR</option>
-          //       <option value='gba'>GBA</option>
-          //     </Select>
-          //   </Flex>
-          // }
+        
           name='Your balance'
-          value='$1,000'
+          value={user[0].netincome-exp+sales}
         />
-        {/* <MiniStatistics
-          startContent={
-            <IconBox
-              w='56px'
-              h='56px'
-              bg='linear-gradient(90deg, #4481EB 0%, #04BEFE 100%)'
-              icon={<Icon w='28px' h='28px' as={MdAddTask} color='white' />}
-            />
-          }
-          name='New Tasks'
-          value='154'
-        /> */}
-        <MiniStatistics
+        <MiniStatics2
           startContent={
             <IconBox
               w='56px'
@@ -133,16 +148,30 @@ export default function UserReports() {
             />
           }
           name='Total Transactions'
-          value='2935'
+          value={trans.length}
         />
       </SimpleGrid>
 
       <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap='20px' mb='20px'>
-        <TotalSpent />
+        <TotalSpent exp={exp} trans={trans} salary={user[0].netincome}/>
         <WeeklyRevenue />
       </SimpleGrid>
+      {
+        trans.map((tran,index)=>{
+          if(index<5){
+            ftrans[index]=trans[trans.length-index-1]
+            if(trans[trans.length-index-1].amount<0)
+            {
+              ftrans[index].type="DEBIT"
+            }
+            else{
+              ftrans[index].type="CREDIT"
+            }
+          }
+        })
+      }
       <SimpleGrid columns={{ base: 1, md: 1, xl: 2 }} gap='20px' mb='20px'>
-        <CheckTable columnsData={columnsDataCheck} tableData={tableDataCheck} />
+        <CheckTable columnsData={columnsDataCheck} tableData={ftrans} />
         <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap='20px'>
           <DailyTraffic />
           <PieCard />
@@ -154,10 +183,11 @@ export default function UserReports() {
           tableData={tableDataComplex}
         />
         <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap='20px'>
-          {/* <Tasks /> */}
           <MiniCalendar h='100%' minW='100%' selectRange={false} />
         </SimpleGrid>
       </SimpleGrid>
+      </>
+      )}
     </Box>
   );
 }
