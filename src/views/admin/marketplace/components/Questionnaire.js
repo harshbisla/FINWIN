@@ -49,7 +49,7 @@ const Questionnaire = () => {
 
   // Simulate the response generation in another file
   const generateResponse = (jsonAnswers) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve)  => {
       setTimeout(() => {
         const response = `Your portfolio response: ${jsonAnswers}`;
         resolve(response);
